@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>東京迪士尼樂園行程排程板 v15.1</title>
+<title>東京迪士尼樂園行程排程板 v16</title>
 <style>
 :root{
   --bg:#f6f7f9; --card:#fff; --text:#1f2937; --muted:#6b7280; --border:#d9dee7;
@@ -144,7 +144,7 @@ button{font:inherit}
   <div id="syncBar" style="font-size:11px;color:#64748b;margin:2px 0 8px">
     尚未登入｜目前先使用本機資料
   </div>
-  <p class="help">左側每張卡片會顯示類型・位置・預留時間；右下角色帶代表所在區域，同區域固定同色。維修／暫停項目仍會排在該分類最後。</p>
+  <p class="help">左側每張卡片會顯示類型・位置・預留時間；右下角色帶代表所在區域，同區域固定同色。手機拖曳時靠近螢幕上／下緣會自動捲動。維修／暫停項目仍會排在該分類最後。</p>
   <p class="source-note">資料基準：東京迪士尼樂園 2026/8/27。DPA／PP 分類依當日可用制度整理。</p>
 
   <div class="tabs">
@@ -675,6 +675,61 @@ firebase.initializeApp({
     return g;
   }
 
+
+  let autoScrollRaf = null;
+  let autoScrollSpeed = 0;
+  let lastDragClientY = null;
+
+  function updateAutoScroll(clientY){
+    lastDragClientY = clientY;
+    const edge = Math.max(70, Math.min(120, window.innerHeight * 0.16));
+    const maxSpeed = 18;
+
+    if(clientY < edge){
+      const strength = Math.max(0, Math.min(1, (edge - clientY) / edge));
+      autoScrollSpeed = -Math.max(3, maxSpeed * strength);
+    }else if(clientY > window.innerHeight - edge){
+      const strength = Math.max(0, Math.min(1, (clientY - (window.innerHeight - edge)) / edge));
+      autoScrollSpeed = Math.max(3, maxSpeed * strength);
+    }else{
+      autoScrollSpeed = 0;
+    }
+
+    if(autoScrollSpeed !== 0 && autoScrollRaf === null){
+      runAutoScroll();
+    }
+  }
+
+  function runAutoScroll(){
+    if(autoScrollSpeed === 0){
+      autoScrollRaf = null;
+      return;
+    }
+
+    window.scrollBy(0, autoScrollSpeed);
+
+    // During scrolling, keep the dragged item's target time synced with
+    // the same finger position even though the page underneath is moving.
+    if(drag && lastDragClientY !== null){
+      const r = timeline.getBoundingClientRect();
+      const insideY = lastDragClientY >= r.top && lastDragClientY <= r.bottom;
+      if(insideY){
+        drag.y = lastDragClientY;
+      }
+    }
+
+    autoScrollRaf = requestAnimationFrame(runAutoScroll);
+  }
+
+  function stopAutoScroll(){
+    autoScrollSpeed = 0;
+    lastDragClientY = null;
+    if(autoScrollRaf !== null){
+      cancelAnimationFrame(autoScrollRaf);
+      autoScrollRaf = null;
+    }
+  }
+
   function startSourceDrag(e,item,card){
     if(e.target.closest('button'))return;
     const sx=e.clientX,sy=e.clientY;
@@ -687,6 +742,7 @@ firebase.initializeApp({
       }
       if(!moved)return;
       g.style.left=ev.clientX+'px';g.style.top=ev.clientY+'px';
+      updateAutoScroll(ev.clientY);
       const r=timeline.getBoundingClientRect();
       const inside=ev.clientX>=r.left&&ev.clientX<=r.right&&ev.clientY>=r.top&&ev.clientY<=r.bottom;
       timeline.classList.toggle('drop-highlight',inside);
@@ -699,6 +755,7 @@ firebase.initializeApp({
       card.removeEventListener('pointercancel',end);
       card.classList.remove('dragging');
       timeline.classList.remove('drop-highlight');
+      stopAutoScroll();
       g?.remove();
       if(moved&&drag?.inside)addPlan(item.id,pointerMinutes(drag.y));
       drag=null;
@@ -716,6 +773,7 @@ firebase.initializeApp({
 
     const move=ev=>{
       if(Math.abs(ev.clientY-startY)<3)return;
+      updateAutoScroll(ev.clientY);
       let next=original+Math.round((ev.clientY-startY)/getSlotH())*15;
       next=Math.max(600,Math.min(1320-item.duration,next));
       plan.minutes=next;
@@ -727,6 +785,7 @@ firebase.initializeApp({
       el.removeEventListener('pointermove',move);
       el.removeEventListener('pointerup',end);
       el.removeEventListener('pointercancel',end);
+      stopAutoScroll();
       save();renderTimeline();
     };
 
