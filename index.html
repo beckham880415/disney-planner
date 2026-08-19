@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>東京迪士尼樂園行程排程板 v15</title>
+<title>東京迪士尼樂園行程排程板 v15.1</title>
 <style>
 :root{
   --bg:#f6f7f9; --card:#fff; --text:#1f2937; --muted:#6b7280; --border:#d9dee7;
@@ -212,6 +212,20 @@ button{font:inherit}
 
 <div class="toast" id="toast"></div>
 
+<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-database-compat.js"></script>
+<script>
+firebase.initializeApp({
+  apiKey: "AIzaSyCkJPtEXRO-flfYIjcCGtyUN-OHqME5hMg",
+  authDomain: "disney-planner-46e83.firebaseapp.com",
+  databaseURL: "https://disney-planner-46e83-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "disney-planner-46e83",
+  storageBucket: "disney-planner-46e83.firebasestorage.app",
+  messagingSenderId: "256667282864",
+  appId: "1:256667282864:web:b1cfab94bbf7e74c9f3a75"
+});
+</script>
 <script>
 (() => {
   const KEY = 'tokyoDisneyPlanner_v15';
