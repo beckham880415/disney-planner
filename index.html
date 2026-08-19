@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>東京迪士尼樂園行程排程板 v16</title>
+<title>東京迪士尼樂園行程排程板 v17</title>
 <style>
 :root{
   --bg:#f6f7f9; --card:#fff; --text:#1f2937; --muted:#6b7280; --border:#d9dee7;
@@ -573,7 +573,7 @@ firebase.initializeApp({
 
   function renderTimeline(){
     timeline.innerHTML='';
-    for(let h=10;h<22;h++){
+    for(let h=9;h<22;h++){
       const hour=document.createElement('div');
       hour.className='hour';
       hour.innerHTML=`<div class="hour-label">${String(h).padStart(2,'0')}:00</div>`;
@@ -605,7 +605,7 @@ firebase.initializeApp({
     el.dataset.area=item.area||'';
 
     const slots=Math.max(1,item.duration/15);
-    el.style.top=(((plan.minutes-600)/15)*getSlotH()+2)+'px';
+    el.style.top=(((plan.minutes-540)/15)*getSlotH()+2)+'px';
     el.style.height=Math.max(34,slots*getSlotH()-4)+'px';
 
     const eligible=item.type==='DPA'||item.type==='PP';
@@ -644,7 +644,7 @@ firebase.initializeApp({
   function pointerMinutes(clientY){
     const r=timeline.getBoundingClientRect();
     const y=Math.max(0,Math.min(r.height-1,clientY-r.top));
-    return Math.max(600,Math.min(1305,600+Math.round(y/getSlotH())*15));
+    return Math.max(540,Math.min(1305,540+Math.round(y/getSlotH())*15));
   }
 
   function addPlan(itemId,minutes){
@@ -775,7 +775,7 @@ firebase.initializeApp({
       if(Math.abs(ev.clientY-startY)<3)return;
       updateAutoScroll(ev.clientY);
       let next=original+Math.round((ev.clientY-startY)/getSlotH())*15;
-      next=Math.max(600,Math.min(1320-item.duration,next));
+      next=Math.max(540,Math.min(1320-item.duration,next));
       plan.minutes=next;
       el.style.top=(((next-600)/15)*getSlotH()+2)+'px';
       el.querySelector('.scheduled-time').textContent=`${formatTime(next)} · ${item.duration} 分`;
