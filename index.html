@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>東京迪士尼樂園行程排程板 v18</title>
+<title>東京迪士尼樂園行程排程板 v19</title>
 <style>
 :root{
   --bg:#f6f7f9; --card:#fff; --text:#1f2937; --muted:#6b7280; --border:#d9dee7;
@@ -236,108 +236,108 @@ firebase.initializeApp({
   // subtype: 遊樂設施 / 遊行表演 / 舞台表演 / 迎賓 / 自訂
   const officialDefaults = [
     // DPA - Attractions
-    {id:'beauty',name:'美女與野獸「城堡奇緣」',type:'DPA',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
-    {id:'baymax-ride',name:'杯麵歡樂之旅',type:'DPA',subtype:'遊樂設施',area:'明日樂園',duration:30},
-    {id:'splash',name:'飛濺山',type:'DPA',subtype:'遊樂設施',area:'動物天地',duration:30},
+    {id:'beauty',name:"美女與野獸「城堡奇緣」（Enchanted Tale of Beauty and the Beast）",type:'DPA',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
+    {id:'baymax-ride',name:"杯麵歡樂之旅（The Happy Ride with Baymax）",type:'DPA',subtype:'遊樂設施',area:'明日樂園',duration:30},
+    {id:'splash',name:"飛濺山（Splash Mountain）",type:'DPA',subtype:'遊樂設施',area:'動物天地',duration:30},
 
     // DPA - Parades / Shows
-    {id:'harmony',name:'迪士尼眾彩交融',type:'DPA',subtype:'遊行表演',area:'園區全域',duration:45},
-    {id:'electrical',name:'東京迪士尼樂園電子大遊行～夢之光',type:'DPA',subtype:'遊行表演',area:'園區全域',duration:45},
-    {id:'reach-stars',name:'Reach for the Stars: Everlasting Dreams',type:'DPA',subtype:'城堡表演',area:'灰姑娘城堡',duration:25},
-    {id:'mickey-music',name:'米奇魔法音樂世界',type:'DPA',subtype:'舞台表演・亦可報名體驗',area:'夢幻樂園',duration:25},
+    {id:'harmony',name:"迪士尼眾彩交融（Disney Harmony in Color）",type:'DPA',subtype:'遊行表演',area:'園區全域',duration:45},
+    {id:'electrical',name:"東京迪士尼樂園電子大遊行～夢之光（Tokyo Disneyland Electrical Parade Dreamlights）",type:'DPA',subtype:'遊行表演',area:'園區全域',duration:45},
+    {id:'reach-stars',name:"星光閃耀：夢想永恆（Reach for the Stars: Everlasting Dreams）",type:'DPA',subtype:'城堡表演',area:'灰姑娘城堡',duration:25},
+    {id:'mickey-music',name:"米奇魔法音樂世界（Mickey's Magical Music World）",type:'DPA',subtype:'舞台表演・亦可報名體驗',area:'夢幻樂園',duration:25},
 
     // PP
-    {id:'thunder',name:'巨雷山',type:'PP',subtype:'遊樂設施',area:'西部樂園',duration:30},
-    {id:'star-tours',name:'星際旅行：冒險續航',type:'PP',subtype:'遊樂設施',area:'明日樂園',duration:30},
-    {id:'monsters',name:'怪獸電力公司「迷藏巡遊車」',type:'PP',subtype:'遊樂設施',area:'明日樂園',duration:30},
-    {id:'pooh',name:'小熊維尼獵蜜記',type:'PP',subtype:'遊樂設施',area:'夢幻樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
-    {id:'haunted',name:'幽靈公館',type:'PP',subtype:'遊樂設施',area:'夢幻樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
+    {id:'thunder',name:"巨雷山（Big Thunder Mountain）",type:'PP',subtype:'遊樂設施',area:'西部樂園',duration:30},
+    {id:'star-tours',name:"星際旅行：冒險續航（Star Tours: The Adventures Continue）",type:'PP',subtype:'遊樂設施',area:'明日樂園',duration:30},
+    {id:'monsters',name:"怪獸電力公司「迷藏巡遊車」（Monsters, Inc. Ride & Go Seek!）",type:'PP',subtype:'遊樂設施',area:'明日樂園',duration:30},
+    {id:'pooh',name:"小熊維尼獵蜜記（Pooh's Hunny Hunt）",type:'PP',subtype:'遊樂設施',area:'夢幻樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
+    {id:'haunted',name:"幽靈公館（Haunted Mansion）",type:'PP',subtype:'遊樂設施',area:'夢幻樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
 
     // NORMAL - World Bazaar
-    {id:'omnibus',name:'雙層巴士',type:'NORMAL',subtype:'遊樂設施',area:'世界市集',duration:30},
-    {id:'penny-arcade',name:'便士拱廊',type:'NORMAL',subtype:'遊樂設施',area:'世界市集',duration:30},
+    {id:'omnibus',name:"雙層巴士（Omnibus）",type:'NORMAL',subtype:'遊樂設施',area:'世界市集',duration:30},
+    {id:'penny-arcade',name:"便士拱廊（Penny Arcade）",type:'NORMAL',subtype:'遊樂設施',area:'世界市集',duration:30},
 
     // NORMAL - Adventureland
-    {id:'western-river',name:'西部沿河鐵路',type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30},
-    {id:'pirates',name:'加勒比海盜',type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30},
-    {id:'jungle-cruise',name:'叢林巡航：勇闖野生世界',type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30},
-    {id:'tiki-stitch',name:'魅惑的提基神殿：史迪奇呈獻「Aloha E Komo Mai!」',type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30},
-    {id:'swiss-treehouse',name:'瑞士家庭樹屋',type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
+    {id:'western-river',name:"西部沿河鐵路（Western River Railroad）",type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30},
+    {id:'pirates',name:"加勒比海盜（Pirates of the Caribbean）",type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30},
+    {id:'jungle-cruise',name:"叢林巡航：勇闖野生世界（Jungle Cruise: Wildlife Expeditions）",type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30},
+    {id:'tiki-stitch',name:"魅惑的提基神殿：史迪奇呈獻「Aloha E Komo Mai!」（The Enchanted Tiki Room: Stitch Presents Aloha E Komo Mai!）",type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30},
+    {id:'swiss-treehouse',name:"瑞士家庭樹屋（Swiss Family Treehouse）",type:'NORMAL',subtype:'遊樂設施',area:'探險樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
 
     // NORMAL - Westernland
-    {id:'shooting-gallery',name:'西部樂園射擊館',type:'NORMAL',subtype:'遊樂設施',area:'西部樂園',duration:30},
-    {id:'country-bear',name:'鄉村頑熊劇場',type:'NORMAL',subtype:'遊樂設施',area:'西部樂園',duration:30},
-    {id:'mark-twain',name:'豪華馬克吐溫號',type:'NORMAL',subtype:'遊樂設施',area:'西部樂園',duration:30},
-    {id:'tom-sawyer',name:'頑童湯姆之島巨木筏',type:'NORMAL',subtype:'遊樂設施',area:'西部樂園',duration:30},
+    {id:'shooting-gallery',name:"西部樂園射擊館（Westernland Shootin’ Gallery）",type:'NORMAL',subtype:'遊樂設施',area:'西部樂園',duration:30},
+    {id:'country-bear',name:"鄉村頑熊劇場（Country Bear Theater）",type:'NORMAL',subtype:'遊樂設施',area:'西部樂園',duration:30},
+    {id:'mark-twain',name:"豪華馬克吐溫號（Mark Twain Riverboat）",type:'NORMAL',subtype:'遊樂設施',area:'西部樂園',duration:30},
+    {id:'tom-sawyer',name:"頑童湯姆之島巨木筏（Tom Sawyer Island Rafts）",type:'NORMAL',subtype:'遊樂設施',area:'西部樂園',duration:30},
 
     // NORMAL - Critter Country
-    {id:'beaver-canoes',name:'海狸兄弟獨木舟歷險',type:'NORMAL',subtype:'遊樂設施',area:'動物天地',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
+    {id:'beaver-canoes',name:"海狸兄弟獨木舟歷險（Beaver Brothers Explorer Canoes）",type:'NORMAL',subtype:'遊樂設施',area:'動物天地',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
 
     // NORMAL - Fantasyland
-    {id:'alice-tea',name:'愛麗絲的午茶派對',type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
-    {id:'small-world',name:'小小世界',type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
-    {id:'snow-white',name:'白雪公主冒險旅程',type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
-    {id:'peter-pan',name:'小飛俠天空之旅',type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
-    {id:'pinocchio',name:'小木偶奇遇記',type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
-    {id:'philhar',name:'米奇魔法交響樂',type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
-    {id:'cinderella-hall',name:'灰姑娘的童話大廳',type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
-    {id:'castle-carrousel',name:'城堡旋轉木馬',type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
-    {id:'dumbo',name:'小飛象',type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
+    {id:'alice-tea',name:"愛麗絲的午茶派對（Alice's Tea Party）",type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
+    {id:'small-world',name:"小小世界（it's a small world）",type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
+    {id:'snow-white',name:"白雪公主冒險旅程（Snow White's Adventures）",type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
+    {id:'peter-pan',name:"小飛俠天空之旅（Peter Pan's Flight）",type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
+    {id:'pinocchio',name:"小木偶奇遇記（Pinocchio's Daring Journey）",type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
+    {id:'philhar',name:"米奇魔法交響樂（Mickey's PhilharMagic）",type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
+    {id:'cinderella-hall',name:"灰姑娘的童話大廳（Cinderella's Fairy Tale Hall）",type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30},
+    {id:'castle-carrousel',name:"城堡旋轉木馬（Castle Carrousel）",type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
+    {id:'dumbo',name:"小飛象（Dumbo The Flying Elephant）",type:'NORMAL',subtype:'遊樂設施',area:'夢幻樂園',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
 
     // NORMAL - Toontown
-    {id:'gadget',name:'艾芝迷你雲霄飛車',type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
-    {id:'goofy-paint',name:'高飛遊漆屋',type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
-    {id:'chip-treehouse',name:'奇奇蒂蒂橡樹屋',type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
-    {id:'toon-park',name:'卡通公園',type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
-    {id:'donald-boat',name:'唐老鴨汽船',type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
-    {id:'minnie-house',name:'米妮公館',type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
-    {id:'roger-rabbit',name:'兔子羅傑卡通轉轉車',type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
+    {id:'gadget',name:"艾芝迷你雲霄飛車（Gadget's Go Coaster）",type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
+    {id:'goofy-paint',name:"高飛遊漆屋（Goofy's Paint 'n' Play House）",type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
+    {id:'chip-treehouse',name:"奇奇蒂蒂橡樹屋（Chip 'n Dale's Treehouse）",type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
+    {id:'toon-park',name:"卡通公園（Toon Park）",type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
+    {id:'donald-boat',name:"唐老鴨汽船（Donald's Boat）",type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
+    {id:'minnie-house',name:"米妮公館（Minnie's House）",type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
+    {id:'roger-rabbit',name:"兔子羅傑卡通轉轉車（Roger Rabbit's Car Toon Spin）",type:'NORMAL',subtype:'遊樂設施',area:'卡通城',duration:30},
 
     // NORMAL - Tomorrowland
-    {id:'stitch-encounter',name:'史迪奇互動體驗',type:'NORMAL',subtype:'遊樂設施',area:'明日樂園',duration:30},
+    {id:'stitch-encounter',name:"史迪奇互動體驗（Stitch Encounter）",type:'NORMAL',subtype:'遊樂設施',area:'明日樂園',duration:30},
 
     // NORMAL - Operating Parades / Shows on 8/27
-    {id:'baymax-cooldown',name:'杯麵消暑任務',type:'NORMAL',subtype:'遊行／娛樂表演',area:'園區全域',duration:35},
-    {id:'jamboree',name:'米奇樂跳跳！同歡共舞！',type:'NORMAL',subtype:'舞台表演・報名體驗',area:'明日樂園',duration:25},
-    {id:'rainbow-luau',name:'米奇七彩晚宴',type:'NORMAL',subtype:'餐飲秀・需預約',area:'探險樂園',duration:60},
+    {id:'baymax-cooldown',name:"杯麵消暑任務（Baymax's Mission: Cool Down）",type:'NORMAL',subtype:'遊行／娛樂表演',area:'園區全域',duration:35},
+    {id:'jamboree',name:"米奇樂跳跳！同歡共舞！（Jamboree Mickey! Let's Dance!）",type:'NORMAL',subtype:'舞台表演・報名體驗',area:'明日樂園',duration:25},
+    {id:'rainbow-luau',name:"米奇七彩晚宴（Mickey's Rainbow Luau）",type:'NORMAL',subtype:'餐飲秀・需預約',area:'探險樂園',duration:60},
 
     // NORMAL - Temporarily closed shows on 8/27
-    {id:'sky-colors',name:'眾彩滿夜空',type:'NORMAL',subtype:'煙火',area:'園區全域',duration:10,maintenance:true,maintenanceNote:'8/27 暫停演出'},
-    {id:'party-gras',name:'Let’s Party Gras!',type:'NORMAL',subtype:'娛樂表演',area:'探險樂園',duration:25,maintenance:true,maintenanceNote:'8/27 暫停演出'},
-    {id:'diamond-variety',name:'The Diamond Variety Muster',type:'NORMAL',subtype:'餐飲秀',area:'西部樂園',duration:60,maintenance:true,maintenanceNote:'8/27 暫停演出'},
+    {id:'sky-colors',name:"眾彩滿夜空（Sky Full of Colors）",type:'NORMAL',subtype:'煙火',area:'園區全域',duration:10,maintenance:true,maintenanceNote:'8/27 暫停演出'},
+    {id:'party-gras',name:"狂歡吧！Let's Party Gras!（Let's Party Gras!）",type:'NORMAL',subtype:'娛樂表演',area:'探險樂園',duration:25,maintenance:true,maintenanceNote:'8/27 暫停演出'},
+    {id:'diamond-variety',name:"鑽石綜藝秀（The Diamond Variety Muster）",type:'NORMAL',subtype:'餐飲秀',area:'西部樂園',duration:60,maintenance:true,maintenanceNote:'8/27 暫停演出'},
 
     // NORMAL - Character Greetings
-    {id:'greet-donald',name:'土撥鼠迎賓小徑（唐老鴨）',type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'西部樂園',duration:30},
-    {id:'greet-daisy',name:'土撥鼠迎賓小徑（黛絲）',type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'西部樂園',duration:30},
-    {id:'greet-mickey',name:'米奇公館會米奇',type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'卡通城',duration:30},
-    {id:'greet-minnie',name:'米妮時尚工作室',type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'卡通城',duration:30},
-    {id:'greet-mainstreet',name:'大街服務所前（迪士尼明星迎賓會）',type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'世界市集',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
+    {id:'greet-donald',name:"土撥鼠迎賓小徑（唐老鴨）（Woodchuck Greeting Trail - Donald Duck）",type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'西部樂園',duration:30},
+    {id:'greet-daisy',name:"土撥鼠迎賓小徑（黛絲）（Woodchuck Greeting Trail - Daisy Duck）",type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'西部樂園',duration:30},
+    {id:'greet-mickey',name:"米奇公館會米奇（Mickey's House and Meet Mickey）",type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'卡通城',duration:30},
+    {id:'greet-minnie',name:"米妮時尚工作室（Minnie's Style Studio）",type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'卡通城',duration:30},
+    {id:'greet-mainstreet',name:"大街服務所前迪士尼明星迎賓會（Main Street House Greeting）",type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'世界市集',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
 
 
     // RESTAURANTS - Disney Mobile Order / 2026-08-27
-    {id:'rest-waffle',name:'Great American Waffle Co.',type:'RESTAURANT',subtype:'Mobile Order・點心',area:'世界市集',duration:30},
-    {id:'rest-refreshment',name:'Refreshment Corner',type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'世界市集',duration:30},
+    {id:'rest-waffle',name:"美式鬆餅公司（Great American Waffle Co.）",type:'RESTAURANT',subtype:'Mobile Order・點心',area:'世界市集',duration:30},
+    {id:'rest-refreshment',name:"點心角（Refreshment Corner）",type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'世界市集',duration:30},
 
-    {id:'rest-cafe-orleans',name:'Café Orléans',type:'RESTAURANT',subtype:'Mobile Order・咖啡／點心',area:'探險樂園',duration:30},
-    {id:'rest-skippers',name:"The Skipper's Galley",type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'探險樂園',duration:30},
-    {id:'rest-squeezers',name:"Squeezer's Tropical Juice Bar",type:'RESTAURANT',subtype:'Mobile Order・飲品／點心',area:'探險樂園',duration:30},
-    {id:'rest-boiler',name:'Boiler Room Bites',type:'RESTAURANT',subtype:'Mobile Order・點心',area:'探險樂園',duration:30},
+    {id:'rest-cafe-orleans',name:"奧爾良咖啡館（Café Orléans）",type:'RESTAURANT',subtype:'Mobile Order・咖啡／點心',area:'探險樂園',duration:30},
+    {id:'rest-skippers',name:"船長的廚房（The Skipper's Galley）",type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'探險樂園',duration:30},
+    {id:'rest-squeezers',name:"Squeezer 熱帶果汁吧（Squeezer's Tropical Juice Bar）",type:'RESTAURANT',subtype:'Mobile Order・飲品／點心',area:'探險樂園',duration:30},
+    {id:'rest-boiler',name:"鍋爐房小吃（Boiler Room Bites）",type:'RESTAURANT',subtype:'Mobile Order・點心',area:'探險樂園',duration:30},
 
-    {id:'rest-cowboy',name:'Cowboy Cookhouse',type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'西部樂園',duration:30},
-    {id:'rest-camp-woodchuck',name:'Camp Woodchuck Kitchen',type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'西部樂園',duration:45},
-    {id:'rest-hungry-bear',name:'Hungry Bear Restaurant',type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'西部樂園',duration:45},
+    {id:'rest-cowboy',name:"牛仔廚房（Cowboy Cookhouse）",type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'西部樂園',duration:30},
+    {id:'rest-camp-woodchuck',name:"土撥鼠營地廚房（Camp Woodchuck Kitchen）",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'西部樂園',duration:45},
+    {id:'rest-hungry-bear',name:"飢餓熊餐廳（Hungry Bear Restaurant）",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'西部樂園',duration:45},
 
-    {id:'rest-grandma-sara',name:"Grandma Sara's Kitchen",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'動物天地',duration:45},
-    {id:'rest-racketys',name:"Rackety's Raccoon Saloon",type:'RESTAURANT',subtype:'Mobile Order・點心',area:'動物天地',duration:30},
+    {id:'rest-grandma-sara',name:"莎拉奶奶的廚房（Grandma Sara's Kitchen）",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'動物天地',duration:45},
+    {id:'rest-racketys',name:"Rackety 浣熊酒館（Rackety's Raccoon Saloon）",type:'RESTAURANT',subtype:'Mobile Order・點心',area:'動物天地',duration:30},
 
-    {id:'rest-captain-hook',name:"Captain Hook's Galley",type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'夢幻樂園',duration:30},
-    {id:'rest-troubadour',name:'Troubadour Tavern',type:'RESTAURANT',subtype:'Mobile Order・點心',area:'夢幻樂園',duration:30},
+    {id:'rest-captain-hook',name:"虎克船長廚房（Captain Hook's Galley）",type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'夢幻樂園',duration:30},
+    {id:'rest-troubadour',name:"吟遊詩人小酒館（Troubadour Tavern）",type:'RESTAURANT',subtype:'Mobile Order・點心',area:'夢幻樂園',duration:30},
 
-    {id:'rest-goodtime',name:"Huey, Dewey and Louie's Good Time Cafe",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'卡通城',duration:45},
+    {id:'rest-goodtime',name:"輝兒、杜兒、路兒好時光咖啡館（Huey, Dewey and Louie's Good Time Cafe）",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'卡通城',duration:45},
 
-    {id:'rest-tomorrowland-terrace',name:'Tomorrowland Terrace',type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'明日樂園',duration:45},
-    {id:'rest-big-pop',name:'The Big Pop',type:'RESTAURANT',subtype:'Mobile Order・爆米花',area:'明日樂園',duration:30},
-    {id:'rest-plazma',name:"Plazma Ray's Diner",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'明日樂園',duration:45},
+    {id:'rest-tomorrowland-terrace',name:"明日樂園露台餐廳（Tomorrowland Terrace）",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'明日樂園',duration:45},
+    {id:'rest-big-pop',name:"大爆米花（The Big Pop）",type:'RESTAURANT',subtype:'Mobile Order・爆米花',area:'明日樂園',duration:30},
+    {id:'rest-plazma',name:"電漿雷伊餐廳（Plazma Ray's Diner）",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'明日樂園',duration:45},
 
     // Planning helpers
     {id:'snack',name:'點心／休息',type:'NORMAL',subtype:'自訂行程',area:'',duration:30},
