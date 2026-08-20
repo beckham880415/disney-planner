@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>東京迪士尼樂園行程排程板 v17</title>
+<title>東京迪士尼樂園行程排程板 v18</title>
 <style>
 :root{
   --bg:#f6f7f9; --card:#fff; --text:#1f2937; --muted:#6b7280; --border:#d9dee7;
@@ -144,7 +144,7 @@ button{font:inherit}
   <div id="syncBar" style="font-size:11px;color:#64748b;margin:2px 0 8px">
     尚未登入｜目前先使用本機資料
   </div>
-  <p class="help">左側每張卡片會顯示類型・位置・預留時間；右下角色帶代表所在區域，同區域固定同色。手機拖曳時靠近螢幕上／下緣會自動捲動。維修／暫停項目仍會排在該分類最後。</p>
+  <p class="help">左側每張卡片會顯示類型・位置・預留時間；餐廳類別只保留 8/27 可用的 Disney Mobile Order 店家。右下角色帶代表所在區域，同區域固定同色。手機拖曳時靠近螢幕上／下緣會自動捲動。維修／暫停項目仍會排在該分類最後。</p>
   <p class="source-note">資料基準：東京迪士尼樂園 2026/8/27。DPA／PP 分類依當日可用制度整理。</p>
 
   <div class="tabs">
@@ -314,24 +314,33 @@ firebase.initializeApp({
     {id:'greet-mainstreet',name:'大街服務所前（迪士尼明星迎賓會）',type:'NORMAL',subtype:'迪士尼明星迎賓會',area:'世界市集',duration:30,maintenance:true,maintenanceNote:'8/27 暫停營運'},
 
 
-    // RESTAURANTS - common Tokyo Disneyland dining options
-    {id:'rest-eastside',name:'Eastside Cafe',type:'RESTAURANT',subtype:'餐廳',area:'世界市集',duration:60},
-    {id:'rest-centerstreet',name:'Center Street Coffeehouse',type:'RESTAURANT',subtype:'餐廳',area:'世界市集',duration:60},
-    {id:'rest-hokusai',name:'Restaurant Hokusai',type:'RESTAURANT',subtype:'餐廳',area:'世界市集',duration:60},
-    {id:'rest-crystal',name:'Crystal Palace Restaurant',type:'RESTAURANT',subtype:'餐廳',area:'探險樂園',duration:60},
-    {id:'rest-polynesian',name:'Polynesian Terrace Restaurant',type:'RESTAURANT',subtype:'餐廳／餐飲秀',area:'探險樂園',duration:75},
-    {id:'rest-china-voyager',name:'China Voyager',type:'RESTAURANT',subtype:'餐廳',area:'探險樂園',duration:45},
-    {id:'rest-camp-woodchuck',name:'Camp Woodchuck Kitchen',type:'RESTAURANT',subtype:'餐廳',area:'西部樂園',duration:45},
-    {id:'rest-hungry-bear',name:'Hungry Bear Restaurant',type:'RESTAURANT',subtype:'餐廳',area:'西部樂園',duration:45},
-    {id:'rest-plaza-pavilion',name:'Plaza Pavilion Restaurant',type:'RESTAURANT',subtype:'餐廳',area:'西部樂園',duration:45},
-    {id:'rest-queen-hearts',name:'Queen of Hearts Banquet Hall',type:'RESTAURANT',subtype:'餐廳',area:'夢幻樂園',duration:60},
-    {id:'rest-grandma-sara',name:"Grandma Sara's Kitchen",type:'RESTAURANT',subtype:'餐廳',area:'動物天地',duration:60},
-    {id:'rest-tomorrowland-terrace',name:'Tomorrowland Terrace',type:'RESTAURANT',subtype:'餐廳',area:'明日樂園',duration:45},
-    {id:'rest-pan-galactic',name:'Pan Galactic Pizza Port',type:'RESTAURANT',subtype:'餐廳',area:'明日樂園',duration:45},
+    // RESTAURANTS - Disney Mobile Order / 2026-08-27
+    {id:'rest-waffle',name:'Great American Waffle Co.',type:'RESTAURANT',subtype:'Mobile Order・點心',area:'世界市集',duration:30},
+    {id:'rest-refreshment',name:'Refreshment Corner',type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'世界市集',duration:30},
+
+    {id:'rest-cafe-orleans',name:'Café Orléans',type:'RESTAURANT',subtype:'Mobile Order・咖啡／點心',area:'探險樂園',duration:30},
+    {id:'rest-skippers',name:"The Skipper's Galley",type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'探險樂園',duration:30},
+    {id:'rest-squeezers',name:"Squeezer's Tropical Juice Bar",type:'RESTAURANT',subtype:'Mobile Order・飲品／點心',area:'探險樂園',duration:30},
+    {id:'rest-boiler',name:'Boiler Room Bites',type:'RESTAURANT',subtype:'Mobile Order・點心',area:'探險樂園',duration:30},
+
+    {id:'rest-cowboy',name:'Cowboy Cookhouse',type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'西部樂園',duration:30},
+    {id:'rest-camp-woodchuck',name:'Camp Woodchuck Kitchen',type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'西部樂園',duration:45},
+    {id:'rest-hungry-bear',name:'Hungry Bear Restaurant',type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'西部樂園',duration:45},
+
+    {id:'rest-grandma-sara',name:"Grandma Sara's Kitchen",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'動物天地',duration:45},
+    {id:'rest-racketys',name:"Rackety's Raccoon Saloon",type:'RESTAURANT',subtype:'Mobile Order・點心',area:'動物天地',duration:30},
+
+    {id:'rest-captain-hook',name:"Captain Hook's Galley",type:'RESTAURANT',subtype:'Mobile Order・餐飲',area:'夢幻樂園',duration:30},
+    {id:'rest-troubadour',name:'Troubadour Tavern',type:'RESTAURANT',subtype:'Mobile Order・點心',area:'夢幻樂園',duration:30},
+
+    {id:'rest-goodtime',name:"Huey, Dewey and Louie's Good Time Cafe",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'卡通城',duration:45},
+
+    {id:'rest-tomorrowland-terrace',name:'Tomorrowland Terrace',type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'明日樂園',duration:45},
+    {id:'rest-big-pop',name:'The Big Pop',type:'RESTAURANT',subtype:'Mobile Order・爆米花',area:'明日樂園',duration:30},
+    {id:'rest-plazma',name:"Plazma Ray's Diner",type:'RESTAURANT',subtype:'Mobile Order・餐廳',area:'明日樂園',duration:45},
 
     // Planning helpers
     {id:'snack',name:'點心／休息',type:'NORMAL',subtype:'自訂行程',area:'',duration:30},
-    {id:'meal',name:'其他用餐／預留用餐',type:'RESTAURANT',subtype:'自訂行程',area:'',duration:60}
   ];
 
   let items = officialDefaults.map(x=>({...x, maintenance:!!x.maintenance}));
@@ -397,7 +406,7 @@ firebase.initializeApp({
     DPA:{label:'DPA',dot:'dpa'},
     PP:{label:'PP',dot:'pp'},
     NORMAL:{label:'一般／不能抽',dot:'normal'},
-    RESTAURANT:{label:'餐廳',dot:'restaurant'}
+    RESTAURANT:{label:'餐廳・Mobile Order',dot:'restaurant'}
   };
 
   const legacyIdMap = {
@@ -795,7 +804,7 @@ firebase.initializeApp({
   }
 
 
-  const mapCoords = {"beauty": [61.5, 19], "baymax-ride": [75.5, 58], "splash": [21, 49], "harmony": [54, 55], "electrical": [53, 55], "reach-stars": [56, 41], "mickey-music": [62, 18], "thunder": [22, 35], "star-tours": [77, 69], "monsters": [80, 61], "pooh": [64, 25], "haunted": [50, 21], "omnibus": [54, 82], "penny-arcade": [53, 86], "western-river": [21, 60], "pirates": [33, 70], "jungle-cruise": [29, 66], "tiki-stitch": [34, 62], "swiss-treehouse": [34, 68], "shooting-gallery": [28, 48], "country-bear": [32, 44], "mark-twain": [31, 29], "tom-sawyer": [31, 25], "beaver-canoes": [26, 21], "alice-tea": [58, 28], "small-world": [67, 31], "snow-white": [53, 31], "peter-pan": [48, 29], "pinocchio": [55, 28], "philhar": [57, 34], "cinderella-hall": [56, 39], "castle-carrousel": [58, 26], "dumbo": [63, 26], "gadget": [77, 29], "goofy-paint": [80, 35], "chip-treehouse": [80, 29], "toon-park": [78, 34], "donald-boat": [83, 32], "minnie-house": [78, 26], "roger-rabbit": [84, 37], "stitch-encounter": [73, 64], "baymax-cooldown": [55, 55], "jamboree": [72, 62], "rainbow-luau": [31, 65], "sky-colors": [55, 44], "party-gras": [32, 61], "diamond-variety": [27, 45], "greet-donald": [31, 40], "greet-daisy": [33, 40], "greet-mickey": [78, 30], "greet-minnie": [77, 26], "greet-mainstreet": [54, 83], "rest-eastside": [59, 80], "rest-centerstreet": [56, 78], "rest-hokusai": [48, 81], "rest-crystal": [42, 59], "rest-polynesian": [30, 60], "rest-china-voyager": [31, 65], "rest-camp-woodchuck": [19, 31], "rest-hungry-bear": [26, 47], "rest-plaza-pavilion": [38, 48], "rest-queen-hearts": [62, 30], "rest-grandma-sara": [21, 48], "rest-tomorrowland-terrace": [67, 60], "rest-pan-galactic": [74, 65]};
+  const mapCoords = {"beauty": [61.5, 19], "baymax-ride": [75.5, 58], "splash": [21, 49], "harmony": [54, 55], "electrical": [53, 55], "reach-stars": [56, 41], "mickey-music": [62, 18], "thunder": [22, 35], "star-tours": [77, 69], "monsters": [80, 61], "pooh": [64, 25], "haunted": [50, 21], "omnibus": [54, 82], "penny-arcade": [53, 86], "western-river": [21, 60], "pirates": [33, 70], "jungle-cruise": [29, 66], "tiki-stitch": [34, 62], "swiss-treehouse": [34, 68], "shooting-gallery": [28, 48], "country-bear": [32, 44], "mark-twain": [31, 29], "tom-sawyer": [31, 25], "beaver-canoes": [26, 21], "alice-tea": [58, 28], "small-world": [67, 31], "snow-white": [53, 31], "peter-pan": [48, 29], "pinocchio": [55, 28], "philhar": [57, 34], "cinderella-hall": [56, 39], "castle-carrousel": [58, 26], "dumbo": [63, 26], "gadget": [77, 29], "goofy-paint": [80, 35], "chip-treehouse": [80, 29], "toon-park": [78, 34], "donald-boat": [83, 32], "minnie-house": [78, 26], "roger-rabbit": [84, 37], "stitch-encounter": [73, 64], "baymax-cooldown": [55, 55], "jamboree": [72, 62], "rainbow-luau": [31, 65], "sky-colors": [55, 44], "party-gras": [32, 61], "diamond-variety": [27, 45], "greet-donald": [31, 40], "greet-daisy": [33, 40], "greet-mickey": [78, 30], "greet-minnie": [77, 26], "greet-mainstreet": [54, 83], "rest-waffle": [53, 81], "rest-refreshment": [51, 77], "rest-cafe-orleans": [37, 66], "rest-skippers": [29, 65], "rest-squeezers": [35, 67], "rest-boiler": [31, 69], "rest-cowboy": [25, 45], "rest-camp-woodchuck": [19, 31], "rest-hungry-bear": [26, 47], "rest-grandma-sara": [21, 48], "rest-racketys": [23, 50], "rest-captain-hook": [49, 32], "rest-troubadour": [54, 34], "rest-goodtime": [80, 33], "rest-tomorrowland-terrace": [67, 60], "rest-big-pop": [76, 63], "rest-plazma": [72, 67]};
   let mapScale=1, mapX=0, mapY=0, activeMapPin=null;
   const mapPointers=new Map();
   let lastPinchDistance=null, lastPanPoint=null;
